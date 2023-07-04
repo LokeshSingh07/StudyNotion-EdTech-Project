@@ -192,7 +192,8 @@ const VideoDetails = () => {
               
               {
                 videoEnded && (
-                  <div className='absolute top-[30%] left-[50%] translate-x-[-50%] flex flex-col items-center font-inter text-[16px] space-y-8 z-20'>
+                  <div className='absolute top-[30%] left-[50%] translate-x-[-50%] flex flex-col items-center font-inter text-[16px] space-y-8 z-20 
+                  bg-richblack-900 bg-opacity-90 shadow-[10px_-5px_50px_-5px] shadow-richblack-700 px-20 py-10 rounded-lg'>
 
                     <div className='flex flex-col items-center space-y-2'>
                       {
