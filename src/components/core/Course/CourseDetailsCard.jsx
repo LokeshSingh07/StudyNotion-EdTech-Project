@@ -25,7 +25,7 @@ const CourseDetailsCard = ({course, handleBuyCourse, setConfirmationModal}) => {
     const handleAddToCart = ()=>{
         console.log("handle add to cart clicked");
         if(user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR){
-            toast.error("You cannnot buy a course you are a instructor");
+            toast.error("You cannnot Add a course to Cart as you are a instructor");
             return;
         }
 
