@@ -9,6 +9,7 @@ import { APIConnector } from '../../services/APIConnector';
 import { categories } from '../../services/APIS';
 import {IoIosArrowDropdownCircle} from 'react-icons/io'
 import { ACCOUNT_TYPE } from "../../utils/constants"
+import NavbarModal from './NavbarModal';
 
 
 
@@ -21,7 +22,7 @@ const Navbar = () => {
   const location = useLocation();
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [navbarModal, setNavbarModal] = useState(false);
 
 
   const fetchSubLinks = async() => {
@@ -166,13 +167,22 @@ const Navbar = () => {
 
             </div>
 
-            <button className='mr-4 md:hidden'>
+            <button className='mr-4 md:hidden'
+              onClick={()=> setNavbarModal(true)}
+            >
               <AiOutlineMenu fontSize={24} fill="#AFB2BF"/>
             </button>
 
         </div>
     
     
+    {
+      navbarModal && (
+        <NavbarModal 
+          setNavbarModal={setNavbarModal}
+        />
+      )
+    }
     
     </div>
   )
