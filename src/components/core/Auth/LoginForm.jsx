@@ -31,7 +31,7 @@ const LoginForm = () => {
     const handleOnSubmit = (e)=>{
         e.preventDefault();
         console.log(formData);
-        dispatch(login(email, password, navigate));
+        dispatch(login(email.toLowerCase(), password, navigate));
     }
 
 
