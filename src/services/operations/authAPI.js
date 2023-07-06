@@ -37,7 +37,7 @@ export function sendOtp(email, navigate){
         }
         catch(err){
             console.log("SEND OTP API ERROR...",err);
-            toast.error("Could not send OTP")
+            toast.error(err?.response?.data?.message)
         }
         dispatch(setLoading(false));
     }
@@ -116,7 +116,7 @@ export function login(email, password, navigate){
         }
         catch(err){
             console.log("LOGIN API ERROR...",err);
-            toast.error("Login failed")
+            toast.error(err?.response?.data?.message)
         }
         dispatch(setLoading(false));
     }
