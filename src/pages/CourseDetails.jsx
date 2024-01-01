@@ -104,7 +104,7 @@ const CourseDetails = () => {
 
         setConfirmationModal({
             text1: "You are not logged in",
-            text2: "Please logged in the purchase the course",
+            text2: "Please logged in to purchase the course",
             btn1Text: "Login",
             btn2Text: "Cancel",
             btn1Handler: ()=> navigate("/login"),
