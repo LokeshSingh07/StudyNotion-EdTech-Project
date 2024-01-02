@@ -16,7 +16,7 @@ const {
     SEND_PAYMENT_SUCCESS_EMAIL_API
 } = studentEndpoints;
 
-const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY;
+
 
 
 // step 1  --> load script
@@ -64,7 +64,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
 
         // options
         const options = {
-            key: process.env.RAZORPAY_KEY,
+            key: process.env.REACT_APP_RAZORPAY_KEY,
             currency: orderResponse.data.data.currency,
             amount: orderResponse.data.data.price,
             order_id: orderResponse.data.data.id,
@@ -88,7 +88,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         // open razorpay window on UI
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
-        paymentObject.on("Payment failed", function(response){
+        paymentObject.on("payment.failed", function(response){
             toast.error("Oops! payment failed");
             console.log(response.err);
         })
