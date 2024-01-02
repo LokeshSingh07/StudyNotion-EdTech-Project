@@ -16,7 +16,7 @@ const {
     SEND_PAYMENT_SUCCESS_EMAIL_API
 } = studentEndpoints;
 
-
+const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY;
 
 
 // step 1  --> load script
