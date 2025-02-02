@@ -16,6 +16,7 @@ const cookieParser =  require("cookie-parser");
 const cors = require("cors");
 const {cloudinaryConnect} = require("./config/Cloudinary");
 const fileUpload = require("express-fileupload");
+const { logger } = require("./utils/Logger");
 require("dotenv").config();
  
 
@@ -65,6 +66,7 @@ app.get("/", (req,res)=>{
 
 
 app.listen(PORT, (req,res)=>{
-    console.log(`App is running at ${PORT} port`)
+    // logger(`Server started on PORT ${PORT}`);
+    logger('✅ Your server is up and running...');
 })
 

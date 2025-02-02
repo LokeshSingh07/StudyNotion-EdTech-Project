@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { logger } = require("../utils/Logger");
 require("dotenv").config();
 
 
@@ -8,10 +9,10 @@ exports.dbConnect = ()=>{
         useUnifiedTopology: true,
     })
     .then(()=>{
-        console.log("Database connected successfully");
+        logger("✅ Database connected successfully");
     })
     .catch((err)=>{
-        console.log("Database connection failed");
+        logger("❌ Database connection failed");
         console.error(err);
         process.exit(1);
     })
