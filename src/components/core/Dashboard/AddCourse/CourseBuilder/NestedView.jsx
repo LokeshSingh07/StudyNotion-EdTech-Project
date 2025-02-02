@@ -65,9 +65,9 @@ const NestedView = ({handleChangeEditSectionName}) => {
 
 
 
-    useEffect(()=>{
-        console.log(course?.courseContent);
-    },[course])
+    // useEffect(()=>{
+    //     console.log(course?.courseContent);
+    // },[course])
   
 
            

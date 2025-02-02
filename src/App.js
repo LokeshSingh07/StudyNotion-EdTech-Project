@@ -39,6 +39,7 @@ import Instructor from "./components/core/Dashboard/InstructorDashboard/index";
 
 
 function App() {
+  console.log = ()=>{}    // then clg will not appear on 
 
 
   const {user} = useSelector((state)=>state.profile);

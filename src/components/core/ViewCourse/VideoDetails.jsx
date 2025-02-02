@@ -128,9 +128,9 @@ const VideoDetails = () => {
   }
 
 
-  useEffect(()=>{
-    console.log(videoData);
-  },[])
+  // useEffect(()=>{
+  //   console.log(videoData);
+  // },[])
 
 
 

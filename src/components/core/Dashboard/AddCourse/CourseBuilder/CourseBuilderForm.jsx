@@ -25,9 +25,9 @@ const CourseBuilderForm = () => {
   const {token} = useSelector((state)=>state.auth);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    console.log("Updated")
-  },[course])
+  // useEffect(()=>{
+  //   console.log("Updated")
+  // },[course])
 
 
   const cancelEdit = ()=>{
