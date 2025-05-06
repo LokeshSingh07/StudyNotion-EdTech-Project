@@ -152,7 +152,7 @@ const Footer = () => {
             
             <div className='text-center flex gap-1 items-center'>
               {/* Made with  */}
-              <AiFillHeart fill='red'/>
+              {/* <AiFillHeart fill='red'/> */}
               {/* Singh  */}
               @ 2025 StudyNotion
             </div>
