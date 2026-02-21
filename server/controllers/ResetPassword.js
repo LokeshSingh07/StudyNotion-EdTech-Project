@@ -13,9 +13,9 @@ exports.resetPasswordToken = async(req,res)=>{
         // check user for this email , email validation
         const user = await User.findOne({email: email});
         if(!user){
-            return res.json({
+            return res.status(400).json({
                 success: false,
-                message: `This Email: ${email} is not Registered with us. Enter a valid Email id `,
+                message: `${email} is not registered with us.`,
             });
         }
 
@@ -32,7 +32,7 @@ exports.resetPasswordToken = async(req,res)=>{
         console.log(("Details: ", updatedDetails));
 
         // create url
-        const url = `https://studynotion-edtech.vercel.app//update-password/${token}`;
+        const url = `https://studynotion-edtech.vercel.app/update-password/${token}`;
 
 
         // send email containing the url    

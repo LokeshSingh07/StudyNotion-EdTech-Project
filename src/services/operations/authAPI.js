@@ -168,7 +168,7 @@ export function getPasswordResetToken(email, setEmailSent){
         }
         catch(err){
             console.log("RESET PASSWORD TOKEN ERROR..", err);
-            toast.error("Failed to send email for reseting password");
+            toast.error(err?.response?.data?.message || "Failed to send email for reseting password");
         }
 
         dispatch(setLoading(false));
