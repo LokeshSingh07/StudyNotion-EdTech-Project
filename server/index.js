@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: "https://studynotion-edtech.vercel.app",
+        origin: "*",
         credentials: true,
     })
 )
