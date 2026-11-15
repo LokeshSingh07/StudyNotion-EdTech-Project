@@ -21,6 +21,7 @@ require("dotenv").config();
  
 
 const PORT = process.env.PORT || 3000;
+const ORIGIN = process.env.ORIGIN || "https://studynotion-edtech.vercel.app";
 
 // database connect
 database.dbConnect();
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: "https://studynotion-edtech.vercel.app",
+        origin: ORIGIN,
         credentials: true,
     })
 )
