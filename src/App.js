@@ -1,201 +1,164 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
-import OpenRoute from './components/core/Auth/OpenRoute';
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
-import ForgotPassword from "./pages/ForgotPassword";
-import UpdatePassword from "./pages/UpdatePassword";
-import VerifyEmail from "./pages/VerifyEmail";
-import About from "./pages/About";
-import ContactUs from "./pages/ContactUs";
-import Dashboard from "./pages/Dashboard";
-import MyProfile from "./components/core/Dashboard/MyProfile";
+import OpenRoute from "./components/core/Auth/OpenRoute";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
-import Error from "./pages/Error";
-import Setting from "./components/core/Dashboard/Setting/index";
-import Cart from "./components/core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants";
-import EnrolledCourse from "./components/core/Dashboard/EnrolledCourse";
 import { useSelector } from "react-redux";
-import AddCourse from "./components/core/Dashboard/AddCourse/index";
-import MyCourses from "./components/core/Dashboard/InstructorCourses/index";
-import EditCourse from "./components/core/Dashboard/EditCourse/index";
-import Catalog from "./pages/Catalog";
-import CourseDetails from "./pages/CourseDetails";
-import ViewCourse from "./pages/ViewCourse";
-import VideoDetails from "./components/core/ViewCourse/VideoDetails";
-import Instructor from "./components/core/Dashboard/InstructorDashboard/index";
 
-
-
-
-
-
-
-
-
-
+// Lazy-loaded pages and components for code splitting
+const Home = lazy(() => import("./pages/Home"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const Login = lazy(() => import("./pages/Login"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
+const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
+const About = lazy(() => import("./pages/About"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
+const Catalog = lazy(() => import("./pages/Catalog"));
+const CourseDetails = lazy(() => import("./pages/CourseDetails"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const MyProfile = lazy(() => import("./components/core/Dashboard/MyProfile"));
+const Setting = lazy(() => import("./components/core/Dashboard/Setting/index"));
+const Error = lazy(() => import("./pages/Error"));
+const EnrolledCourse = lazy(() => import("./components/core/Dashboard/EnrolledCourse"));
+const Cart = lazy(() => import("./components/core/Dashboard/Cart/index"));
+const AddCourse = lazy(() => import("./components/core/Dashboard/AddCourse/index"));
+const MyCourses = lazy(() => import("./components/core/Dashboard/InstructorCourses/index"));
+const EditCourse = lazy(() => import("./components/core/Dashboard/EditCourse/index"));
+const ViewCourse = lazy(() => import("./pages/ViewCourse"));
+const VideoDetails = lazy(() => import("./components/core/ViewCourse/VideoDetails"));
+const Instructor = lazy(() => import("./components/core/Dashboard/InstructorDashboard/index"));
 
 function App() {
-  console.log = ()=>{}    // then clg will not appear on 
+  console.log = () => {};
 
-
-  const {user} = useSelector((state)=>state.profile);
-
+  const { user } = useSelector((state) => state.profile);
 
   return (
-    <div className='w-screen min-h-screen bg-richblack-900 flex flex-col font-inter'>
+    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+      <Navbar />
 
+      <Suspense
+        fallback={
+          <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center">
+            <div className="spinner"></div>
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog/:catalogName" element={<Catalog />} />
+          <Route path="/courses/:courseId" element={<CourseDetails />} />
 
-      <Navbar/>
+          <Route
+            path="/signup"
+            element={
+              <OpenRoute>
+                <SignUp />
+              </OpenRoute>
+            }
+          />
 
+          <Route
+            path="/login"
+            element={
+              <OpenRoute>
+                <Login />
+              </OpenRoute>
+            }
+          />
 
+          <Route
+            path="/forgot-password"
+            element={
+              <OpenRoute>
+                <ForgotPassword />
+              </OpenRoute>
+            }
+          />
 
+          <Route
+            path="/update-password/:id"
+            element={
+              <OpenRoute>
+                <UpdatePassword />
+              </OpenRoute>
+            }
+          />
 
+          <Route
+            path="/verify-email"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
+              </OpenRoute>
+            }
+          />
 
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/catalog/:catalogName" element={<Catalog/>}/>
-        <Route path="/courses/:courseId" element={<CourseDetails/>}/>
+          <Route path="/about" element={<About />} />
 
+          {/* Contact Page Route */}
+          <Route path="/contact" element={<ContactUs />} />
 
-        <Route 
-          path="/signup"
-          element={
-            <OpenRoute>
-              <SignUp/>
-            </OpenRoute>
-          }
-        />
+          {/* Dashboard nesting route */}
+          <Route
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
+            <Route path="/dashboard/my-profile" element={<MyProfile />} />
+            <Route path="/dashboard/settings" element={<Setting />} />
 
-        <Route
-          path="/login"
-          element={
-            <OpenRoute>
-              <Login/>
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="/forgot-password"
-          element={
-            <OpenRoute>
-              <ForgotPassword/>
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="/update-password/:id"
-          element={
-            <OpenRoute>
-              <UpdatePassword/>
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="/verify-email"
-          element={
-            <OpenRoute>
-              <VerifyEmail/>
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="/about"
-          element={
-              <About/>
-          }
-        />
-
-        {/* Contact Page Route */}
-        <Route path="/contact" element={<ContactUs/>}/>
-
-
-
-
-
-
-
-
-
-        {/* Dashboard nesting route */}
-        <Route  
-          element={
-            <PrivateRoute>
-              <Dashboard/>
-            </PrivateRoute>
-          }
-        >
-
-          <Route path="/dashboard/my-profile" element={<MyProfile/>}/>
-          <Route path="/dashboard/settings" element={<Setting/>}/>
-
-
-          {
-            user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
-                <Route path="/dashboard/enrolled-courses" element={<EnrolledCourse/>}/>
-                <Route path="/dashboard/cart" element={<Cart/>}/>
-
-              </>
-            )
-          }
-
-
-          {
-            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-              <>
-                <Route path="/dashboard/instructor" element={<Instructor/>}/>
-                <Route path="/dashboard/my-courses" element={<MyCourses/>}/>
-                <Route path="/dashboard/add-course" element={<AddCourse/>}/>
-                <Route path="/dashboard/edit-course/:courseId" element={<EditCourse/>}/>
-
-              </>
-            )
-          }
-
-
-        </Route>
-
-
-
-
-
-        {/* Nesting Routes for Video */}
-        <Route 
-          element={
-            <PrivateRoute>
-              <ViewCourse/>
-            </PrivateRoute>
-          }
-        >
-          {
-            user?.accountType === ACCOUNT_TYPE.STUDENT && (
-              <>
-                <Route 
-                  path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" 
-                  element={<VideoDetails/>}  
+                <Route
+                  path="/dashboard/enrolled-courses"
+                  element={<EnrolledCourse />}
                 />
-
-
+                <Route path="/dashboard/cart" element={<Cart />} />
               </>
-            )
-          }
+            )}
 
-        </Route>
+            {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route
+                  path="/dashboard/instructor"
+                  element={<Instructor />}
+                />
+                <Route path="/dashboard/my-courses" element={<MyCourses />} />
+                <Route path="/dashboard/add-course" element={<AddCourse />} />
+                <Route
+                  path="/dashboard/edit-course/:courseId"
+                  element={<EditCourse />}
+                />
+              </>
+            )}
+          </Route>
 
+          {/* Nesting Routes for Video */}
+          <Route
+            element={
+              <PrivateRoute>
+                <ViewCourse />
+              </PrivateRoute>
+            }
+          >
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <Route
+                path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                element={<VideoDetails />}
+              />
+            )}
+          </Route>
 
-
-        {/* 404 Not found route */}
-        <Route path="*" element={<Error/>}/>
-      </Routes>
-
+          {/* 404 Not found route */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
